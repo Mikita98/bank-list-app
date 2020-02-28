@@ -1,0 +1,207 @@
+<h1 mat-dialog-title>
+  {{ mode === MODES.CREATE
+      ? 'Создание клиента'
+      : mode === MODES.EDIT
+        ? 'Редактирование клиента'
+        : 'Подробная информация о клиенте'
+  }}
+</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="clientForm" fxLayout="column">
+    <mat-form-field>
+      <mat-label>Фамилия</mat-label>
+      <input matInput formControlName="lastName" placeholder="Введите Вашу фамилию" required>
+      <mat-error *ngIf="clientForm.controls.lastName.hasError('required')">
+        Это поле является <strong>обязательным</strong>
+      </mat-error>
+      <mat-error *ngIf="clientForm.controls.lastName.hasError('minlength')">
+        Фамилия должна быть хотя бы 2 символа
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Имя</mat-label>
+      <input matInput formControlName="firstName" placeholder="Введите Ваше имя" required>
+      <mat-error *ngIf="clientForm.controls.firstName.hasError('required')">
+        Это поле является <strong>обязательным</strong>
+      </mat-error>
+      <mat-error *ngIf="clientForm.controls.firstName.hasError('minlength')">
+        Имя должно быть хотя бы 2 символа
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Отчество</mat-label>
+      <input matInput formControlName="middleName" placeholder="Введите Ваше отчество" required>
+      <mat-error *ngIf="clientForm.controls.middleName.hasError('required')">
+        Это поле является <strong>обязательным</strong>
+      </mat-error>
+      <mat-error *ngIf="clientForm.controls.middleName.hasError('minlength')">
+        Отчество должно быть хотя бы 2 символа
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Дата рождения</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="Выберете дату рождения" formControlName="birthDay">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-radio-group formControlName="sex" required fxLayoutGap="10px">
+      <mat-radio-button [value]="SEXES.MALE">{{SEXES.MALE}}</mat-radio-button>
+      <mat-radio-button [value]="SEXES.FEMALE">{{SEXES.FEMALE}}</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field>
+      <mat-label>Серия паспорта</mat-label>
+      <input matInput formControlName="passportSeries" placeholder="Введите серию паспорта" required>
+      <mat-error *ngIf="clientForm.controls.passportSeries.hasError('required')">
+        Это поле является <strong>обязательным</strong>
+      </mat-error>
+      <mat-error *ngIf="clientForm.controls.passportSeries.hasError('minlength')">
+        Серия паспорта должно быть 2 символа
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Номер паспорта</mat-label>
+      <input matInput formControlName="passportNumber" placeholder="Введите номер паспорта" required>
+      <mat-error *ngIf="clientForm.controls.passportNumber.hasError('required')">
+        Это поле является <strong>обязательным</strong>
+      </mat-error>
+      <mat-error *ngIf="clientForm.controls.passportNumber.hasError('minlength')">
+        Номер паспорта должен быть 7 символов
+      </mat-error>
+      <mat-error *ngIf="clientForm.controls.passportNumber.hasError('maxlength')">
+        Номер паспорта должен быть 7 символов
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Паспорт выдан</mat-label>
+      <input matInput formControlName="passportIssuer" placeholder="Введите кем выдан паспорт" required>
+      <mat-error *ngIf="clientForm.controls.passportIssuer.hasError('required')">
+        Это поле является <strong>обязательным</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Дата выдачи паспорта</mat-label>
+      <input matInput [matDatepicker]="picker1" placeholder="Выберете дату выдачи паспорта" formControlName="passportIssueDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>ID паспорта</mat-label>
+      <input matInput formControlName="idNumber" placeholder="Введите ID паспорта" required>
+      <mat-error *ngIf="clientForm.controls.idNumber.hasError('required')">
+        Это поле является <strong>обязательным</strong>
+      </mat-error>
+      <mat-error *ngIf="clientForm.controls.idNumber.hasError('minlength')">
+        Серия паспорта должно быть 14 символа
+      </mat-error>
+      <mat-error *ngIf="clientForm.controls.idNumber.hasError('maxlength')">
+        Серия паспорта должно быть 14 символа
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Место рождения</mat-label>
+      <input matInput formControlName="birthPlace" placeholder="Введите место рождения" required>
+      <mat-error *ngIf="clientForm.controls.birthPlace.hasError('required')">
+        Это поле является <strong>обязательным</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Город проживания</mat-label>
+      <mat-select formControlName="currentCity" required>
+        <mat-option *ngFor="let city of citiesValues" [value]="city">
+          {{city}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Адрес рождения</mat-label>
+      <input matInput formControlName="currentAddress" placeholder="Введите адрес проживания" required>
+      <mat-error *ngIf="clientForm.controls.currentAddress.hasError('required')">
+        Это поле является <strong>обязательным</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Мобильный телефон</mat-label>
+      <input matInput formControlName="mobilePhone" placeholder="Введите ваш мобильный телефон">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Электронная почта</mat-label>
+      <input type="email" matInput formControlName="email" placeholder="Введите вашу электронную почту">
+      <mat-error *ngIf="clientForm.controls.email.hasError('email')">
+        Введите правильный адрес электронной почты
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Город регистрации</mat-label>
+      <mat-select formControlName="registeredCity" required>
+        <mat-option *ngFor="let city of citiesValues" [value]="city">
+          {{city}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Семейное положение</mat-label>
+      <mat-select formControlName="martialStatus" required>
+        <mat-option *ngFor="let status of martialStatusValues" [value]="status">
+          {{status}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Гражданство</mat-label>
+      <mat-select formControlName="citizenship" required>
+        <mat-option *ngFor="let ship of citizenshipValues" [value]="ship">
+          {{ship}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Инвалидность</mat-label>
+      <mat-select formControlName="disability">
+        <mat-option *ngFor="let value of disabilityValues" [value]="value">
+          {{value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="retired">
+      Пенсионер
+    </mat-checkbox>
+
+    <mat-form-field>
+      <mat-label>Месячный доход</mat-label>
+      <input type="number" matInput formControlName="monthlyIncome" placeholder="Введите ваш месячный доход">
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayout="row"
+     fxLayoutGap="10px"
+     fxLayoutAlign="flex-end center">
+  <button mat-button mat-dialog-close>
+    Закрыть
+  </button>
+  <button mat-raised-button color="primary"
+          [disabled]="!clientForm.valid"
+          (click)="performAction()"
+          *ngIf="mode !== MODES.INFO">
+    <span>{{mode === MODES.CREATE ? 'Создать' : 'Изменить' }}</span>
+  </button>
+</div>

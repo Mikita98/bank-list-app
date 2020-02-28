@@ -1,0 +1,100 @@
+<mat-toolbar color="primary"
+             fxLayout="row"
+             fxLayoutAlign="space-around center"
+             class="mat-elevation-z8">
+  <p>Список аккаунтов банка</p>
+
+  <button mat-raised-button (click)="openAddClientModal()">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
+<ng-container *ngIf="loading" >
+  <div fxFlexFill fxLayoutAlign="center center">
+    <mat-spinner color="accent" diameter="50">
+    </mat-spinner>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="!loading">
+  <div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" [trackBy]="trackBy" matSort>
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell fxFlex="0 1 15%" *matHeaderCellDef>
+          Имя
+        </mat-header-cell>
+        <mat-cell fxFlex="0 1 15%" *matCellDef="let element">
+          {{element.firstName}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell fxFlex="0 1 15%" *matHeaderCellDef mat-sort-header>
+          Фамилия
+        </mat-header-cell>
+        <mat-cell fxFlex="0 1 15%" *matCellDef="let element">
+          {{element.lastName}}
+        </mat-cell>
+      </ng-container>
+<!--      <ng-container matColumnDef="currentCity">-->
+<!--        <mat-header-cell fxFlex="0 1 10%" *matHeaderCellDef>-->
+<!--          Город проживания-->
+<!--        </mat-header-cell>-->
+<!--        <mat-cell fxFlex="0 1 10%" *matCellDef="let element">-->
+<!--          {{element.currentCity}}-->
+<!--        </mat-cell>-->
+<!--      </ng-container>-->
+      <ng-container matColumnDef="sex">
+        <mat-header-cell fxFlex="0 1 5%" *matHeaderCellDef mat-sort-header>
+          Пол
+        </mat-header-cell>
+        <mat-cell fxFlex="0 1 5%" *matCellDef="let element">
+          {{element.sex}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="mobilePhone">
+        <mat-header-cell fxFlex="0 1 15%" *matHeaderCellDef>
+          Номер телефона
+        </mat-header-cell>
+        <mat-cell fxFlex="0 1 15%" *matCellDef="let element">
+          {{element.mobilePhone}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="currentCity">
+        <mat-header-cell fxFlex="0 1 15%" *matHeaderCellDef>
+          Город проживания
+        </mat-header-cell>
+        <mat-cell fxFlex="0 1 15%" *matCellDef="let element">
+          {{element.currentCity}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell class="actions-column" *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element" class="actions-column">
+          <mat-chip-list>
+            <mat-chip color="primary"
+                      (click)="openInfo(element)"
+                      matTooltip="Подробная информация">
+              <mat-icon>info</mat-icon>
+            </mat-chip>
+            <mat-chip color="primary"
+                      (click)="editUser(element)"
+                      matTooltip="Редактировать">
+              <mat-icon>edit</mat-icon>
+            </mat-chip>
+            <mat-chip color="primary"
+                      (click)="deleteClient(element)"
+                      matTooltip="Удалить клиента">
+              <mat-icon>delete</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</ng-container>

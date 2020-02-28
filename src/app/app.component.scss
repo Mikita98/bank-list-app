@@ -1,0 +1,38 @@
+.actions-column {
+  display: none;
+}
+
+.mat-chip-list {
+  .mat-chip {
+    padding: 5px;
+    min-height: 27px;
+    cursor: pointer;
+  }
+  .mat-icon {
+    font-size: 17px;
+    height: 17px;
+    width: 17px;
+  }
+}
+
+.mat-row:hover {
+  backface-visibility: hidden;
+  transform: scale(1.003);
+  box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+
+  .actions-column {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: calc(50% - 30px);
+    //background-color: inherit;
+    justify-content: flex-end;
+    margin-left: 10px;
+    padding: 5px!important;
+    flex: auto;
+  }
+
+  .hidden-on-hover {
+    display: none !important;
+  }
+}

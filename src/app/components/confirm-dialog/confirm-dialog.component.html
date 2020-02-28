@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Подтвердите действие</h1>
+
+<div mat-dialog-content>
+  <p>Вы уверены что хотите удалить клиента (ФИО: {{data.lastName + ' ' + data.firstName + ' ' + data.middleName}})? Это действие невозможно отменить!</p>
+</div>
+
+<div mat-dialog-actions fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="flex-end">
+  <button mat-button mat-dialog-close>Отменить</button>
+  <button mat-raised-button
+          (click)="confirm()"
+          color="primary">Подтвердить</button>
+</div>

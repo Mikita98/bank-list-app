@@ -7,7 +7,7 @@ import {IClient} from '../interfaces/clients.interface';
   providedIn: 'root'
 })
 export class ClientService {
-  private readonly BASE_URL = 'http://localhost:3000';
+  private readonly BASE_URL = 'https://bank-list-app.herokuapp.com';
 
   constructor(private readonly http: HttpClient) { }
 
